@@ -1,1 +1,1 @@
-export * from "./cynic";
+export * from "./channel";

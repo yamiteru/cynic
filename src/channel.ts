@@ -1,6 +1,6 @@
 type Callback<T> = (v: T) => void;
 
-export const cynic = <T, C extends Callback<T> = Callback<T>>(subs: C[] = []) => {
+export const channel = <T, C extends Callback<T> = Callback<T>>(subs: C[] = []) => {
     const set = new Set<C>(subs);
 
     return {
