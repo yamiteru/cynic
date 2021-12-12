@@ -5,10 +5,15 @@
   "author": "Miroslav Vršecký <office@yamiteru.xyz>",
   "license": "MIT",
   "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only bench/index.ts",
+    "test": "jest"
   },
   "devDependencies": {
+    "@types/jest": "^27.0.3",
     "@types/node": "^16.11.10",
+    "jest": "^27.4.4",
+    "ts-jest": "^27.1.1",
     "ts-node-dev": "^1.1.8",
-    "typescript": "^4.5.2"
+    "typescript": "^4.5.3"
   }
 }
