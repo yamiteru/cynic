@@ -24,7 +24,7 @@ And can be cleared just like this:
 
 ```typescript
 for (const channel of player) {
-    channel.clear();
+    channel.clr();
 }
 ```
 
