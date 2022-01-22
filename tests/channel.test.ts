@@ -1,4 +1,4 @@
-import { channel } from "../src";
+import { channel, clear, has, publish, size, subscribe } from "../src";
 
 const noop1 = () => {};
 const noop2 = () => {};
@@ -8,10 +8,10 @@ describe("channel", () => {
         let count = 0;
         const channel$ = channel<string>();
 
-        channel$.sub(() => count++);
-        channel$.sub(() => count++);
+        subscribe(channel$, () => count++);
+        subscribe(channel$, () => count++);
 
-        channel$.pub("test");
+        publish(channel$, "test");
 
         expect(count).toBe(2);
     });
@@ -23,7 +23,7 @@ describe("channel", () => {
             () => count++
         ]);
 
-        channel$.pub("test");
+        publish(channel$, "test");
 
         expect(count).toBe(2);
     });
@@ -31,49 +31,49 @@ describe("channel", () => {
     it("unsubscribes", () => {
         const channel$ = channel();
 
-        const unsub1 = channel$.sub(noop1);
-        channel$.sub(noop2); 
+        const unsub1 = subscribe(channel$, noop1);
+        subscribe(channel$, noop2); 
 
         unsub1();
 
-        expect(channel$.lng()).toBe(1);
+        expect(size(channel$)).toBe(1);
     });
 
     it("returns channel length", () => {
         const channel$ = channel();
 
-        channel$.sub(noop1);
-        channel$.sub(noop2);
+        subscribe(channel$, noop1);
+        subscribe(channel$, noop2);
 
-        expect(channel$.lng()).toBe(2);
+        expect(size(channel$)).toBe(2);
     });
 
     it("clears channel", () => {
         const channel$ = channel();
 
-        channel$.sub(noop1);
-        channel$.sub(noop2);
+        subscribe(channel$, noop1);
+        subscribe(channel$, noop2);
 
-        channel$.clr();
+        clear(channel$);
 
-        expect(channel$.lng()).toBe(0);
+        expect(size(channel$)).toBe(0);
     });
 
     it("checks for subscriber", () => {
         const channel$ = channel();
 
-        channel$.sub(noop1);
-        channel$.sub(noop2);
+        subscribe(channel$, noop1);
+        subscribe(channel$, noop2);
 
-        expect(channel$.has(noop1)).toBe(true);
+        expect(has(channel$, noop1)).toBe(true);
     });
 
     it("doesn't resubscribe identical subscriber", () => {
         const channel$ = channel();
 
-        channel$.sub(noop1);
-        channel$.sub(noop1);
+        subscribe(channel$, noop1);
+        subscribe(channel$, noop1);
         
-        expect(channel$.lng()).toBe(1);
+        expect(size(channel$)).toBe(1);
     });
 });

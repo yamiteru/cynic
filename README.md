@@ -1,77 +1,87 @@
 # Cynic
 
-Tiny and simple TS pub/sub library with great focus on performance.
+Tiny (±150 bytes) and simple TS pub/sub library with great focus on performance.
 
 ## Concept
 
-Most pub/sub libraries are based on string matching and some add an additional wildcard matching like `player.*`. Although this is a valid approach it's completely unnecessary.
+Most pub/sub libraries are based on string matching. Some even add an additional wildcard matching like `player.*`. Although this is a valid approach it's usually unnecessary.
 
-We can simply externalize the internal nested structure of `player.*` into our custom data structure (object, array, etc.).
+We can simply externalize the internal nested structure of `player.*` into our custom data structure  (object, array, etc.) and logic around it.
 
-This makes the inner workings of the library more transparent and also more performant since we don't have to match an unknown string to a dynamic structure.
+This makes the inner workings of the library more transparent and also more performant since we don't have to match an unknown string to a dynamic structure. Also we get type safety as a bonus!
 
 The `player.*` structure can be expressed as a simple object just like this:
 
 ```typescript
 const player = {
-    position: channel(),
-    health: channel(),
-    money: channel(),
+    position: channel{ x: number, y: number, z: number }(),
+    health: channel<number>(),
+    money: channel<number>(),
 };
 ```
 
 And can be cleared just like this:
 
 ```typescript
-for (const channel of player) {
-    channel.clr();
+for (const channel$ of player) {
+    clear(channel$);
 }
 ```
 
-Cynic internally uses sets as opposed to objects, maps or arrays. Since sets have time complexity of `O(1)` for `.add`, `.delete` and `.has` they're a great candidate for storing and accessing subscribers.
+Cynic internally uses sets as opposed to objects, maps or arrays. Since sets have time complexity of `O(1)` for `.add`, `.delete` and `.has` they're a great candidate for storing and accessing data.
 
-Also since Cynic provides a function to unsubscribe a subscriber you don't need to save callbacks into variables so you can remove subscribers later. 
+Also when you subscribe to a channel you get back an unsubscribe function so you don't have to store callbacks in constants in order for you to unsubscribe a callback. 
+
+___
 
 ## Usage
 
 ```typescript
-const playerPosition = channel<{ x: number, y: number, z: number }>();
+const playerPosition$ = channel<{ x: number, y: number, z: number }>();
 ```
 
-### sub
+### subscribe
 
 ```typescript
-const playerPositionUnsubscribe = playerPosition((pos) => {
+const playerPositionUnsubscribe = subscribe(playerPosition$, (pos) => {
     notifyEnemies(pos);
     updateChunks(pos);
 });
 ```
 
-### pub
+### publish
 
 ```typescript
-playerPosition.pub({
+publish(playerPosition$, {
     x: 10, y: 0, z: 4
 });
 ```
 
-## lng
+## size
 
 ```typescript
-const subCount = playerPosition.lng();
+const subCount = size(playerPosition$);
 ```
 
 ## has
 
 ```typescript
-const hasLog = playerPosition.has(console.log);
+const hasLog = has(playerPosition$, console.log);
 ```
 
-## clr
+## clear
 
 ```typescript
-playerPosition.clr();
+clear(playerPosition$);
 ```
+
+___
+
+## Modularity
+
+Each `channel` is basically just a wrapper around a set. This set is stored in an object property using a secret symbol. Thanks to this it can be accessed by official functions provided by this package but cannot be accessed anywhere else.
+
+Thanks to this Cynic is very tree-shakable. If you think there should be more official functions just create a PR! I'm very open to any improvement of this library.
 
 ___
 
