@@ -6,6 +6,7 @@
   "license": "MIT",
   "description": "Tiny (±250 bytes) and simple TS pub/sub library with great focus on performance.",
 
+  "source": "src/index.ts",
   "main": "dist/cynic.js",
   "module": "dist/cynic.mjs",
   "typings": "dist/cynic.d.ts",
