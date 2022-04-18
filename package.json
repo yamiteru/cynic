@@ -13,7 +13,8 @@
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "build": "rollup -c",
-    "test": "jest"
+    "test": "jest",
+    "npm": "yarn test && yarn build && yarn publish"
   },
 
   "devDependencies": {
