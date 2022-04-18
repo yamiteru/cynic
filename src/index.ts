@@ -10,3 +10,4 @@ export * from "./from";
 export * from "./readonly";
 export * from "./trigger";
 export * from "./end";
+export * from "./freeze";
