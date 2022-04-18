@@ -1,4 +1,5 @@
-export * from "./channel";
+export * from "./defaultMap"
+export * from "./event";
 export * from "./subscribe";
 export * from "./publish";
 export * from "./size";

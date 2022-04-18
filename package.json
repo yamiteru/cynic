@@ -1,28 +1,37 @@
 {
   "name": "@yamiteru/cynic",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "repository": "https://github.com/the-yamiteru/cynic.git",
   "author": "Miroslav Vršecký <office@yamiteru.xyz>",
   "license": "MIT",
-  "description": "Tiny (±150 bytes) and simple TS pub/sub library with great focus on performance.",
+  "description": "Tiny (±250 bytes) and simple TS pub/sub library with great focus on performance.",
+
   "main": "dist/cynic.js",
   "module": "dist/cynic.mjs",
   "typings": "dist/cynic.d.ts",
+
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "build": "rollup -c",
     "test": "jest"
   },
+
   "devDependencies": {
-    "@types/jest": "^27.0.3",
-    "@types/node": "^16.11.10",
-    "esbuild": "^0.14.2",
-    "jest": "^27.4.4",
-    "rollup": "^2.61.1",
-    "rollup-plugin-dts": "^4.0.1",
-    "rollup-plugin-esbuild": "^4.7.2",
-    "ts-jest": "^27.1.1",
-    "ts-node-dev": "^1.1.8",
-    "typescript": "^4.5.3"
-  }
+    "@types/jest": "27.4.1",
+    "@types/node": "16.11.27",
+    "esbuild": "0.14.36",
+    "jest": "27.5.1",
+    "rollup": "2.70.2",
+    "rollup-plugin-dts": "4.2.1",
+    "rollup-plugin-esbuild": "4.9.1",
+    "ts-jest": "27.1.4",
+    "ts-node-dev": "1.1.8",
+    "typescript": "4.6.3"
+  },
+
+  "engines": {
+    "npm": ">=7.0.0",
+    "node": ">=16.0.0"
+  },
+  "packageManager": "yarn@1.22.18"
 }

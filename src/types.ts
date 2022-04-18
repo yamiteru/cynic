@@ -1,7 +1,15 @@
-import { SET } from "./symbols";
+import {EMPTY, MAP, SET} from "./symbols";
 
-export type Callback<T> = (value: T) => void;
+export type Either<L, R> = L | R;
 
-export type Channel<T, C extends Callback<T> = Callback<T>> = {
+export type Nullable<T> = Either<null, T>;
+
+export type TCallback<T> = (value: T) => void;
+
+export type TMap<I, O> = (value: I) => O | undefined;
+
+export type Event<I, O = I, C extends TCallback<O> = TCallback<O>> = Readonly<{
     [SET]: Set<C>;
-};
+    [MAP]: TMap<I, O>;
+    [EMPTY]?: boolean;
+}>;

@@ -1,4 +1,6 @@
 import { SET } from "./symbols";
-import { Channel } from "./types";
+import { Event } from "./types";
 
-export const size = <T>(channel$: Channel<T>) => channel$[SET].size;
+export function size<I, O>($event: Event<I, O>) {
+	return $event[SET].size;
+}

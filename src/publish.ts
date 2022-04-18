@@ -1,6 +1,12 @@
-import { SET } from "./symbols";
-import { Channel } from "./types";
+import {EMPTY, MAP, SET} from "./symbols";
+import { Event } from "./types";
 
-export const publish = <T>(channel$: Channel<T>, value: T) => {
-    for (const callback of channel$[SET].values()) callback(value);
-};
+export function publish<I, O>($event: Event<I, O>, value?: I) {
+    const mappedValue = $event[MAP](value);
+
+    if(!!$event[EMPTY] || mappedValue !== undefined) {
+        for (const callback of $event[SET].values()) {
+            callback(mappedValue);
+        }
+    }
+}

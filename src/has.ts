@@ -1,4 +1,6 @@
 import { SET } from "./symbols";
-import { Callback, Channel } from "./types";
+import {Event, TCallback} from "./types";
 
-export const has = <T, C extends Callback<T>>(channel$: Channel<T, C>, callback: C) => channel$[SET].has(callback);
+export function has<I, O, C extends TCallback<O> = TCallback<O>>($event: Event<I, O, C>, callback: C){
+	return $event[SET].has(callback);
+}

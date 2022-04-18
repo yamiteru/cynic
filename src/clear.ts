@@ -1,4 +1,6 @@
 import { SET } from "./symbols";
-import { Channel } from "./types";
+import {Event} from "./types";
 
-export const clear = <T>(channel$: Channel<T>) => channel$[SET].clear();
+export function clear<I, O>($event: Event<I, O>) {
+	$event[SET].clear();
+}
