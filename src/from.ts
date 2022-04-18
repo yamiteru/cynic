@@ -1,7 +1,7 @@
 import {event} from "./event";
 import {publish} from "./publish";
 import {ON_END} from "./symbols";
-import {Nullable, TCallback, TMap} from "./types";
+import {Event, Nullable, TCallback, TMap} from "./types";
 import {readonly} from "./readonly";
 import {EventEmitter} from "events";
 
@@ -14,7 +14,7 @@ export function from<
 	type: string,
 	map?: Nullable<TMap<I, O>>,
 	subs: C[] = []
-) {
+): Event<I, O> {
 	const isEventTarget = target instanceof EventTarget;
 	const $event = event<I, O, C>(map, subs);
 	const callback = (v) => publish($event, v);
