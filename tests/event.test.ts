@@ -1,8 +1,8 @@
 import { event, clear, has, publish, size, subscribe } from "../src";
-import {trigger} from "../src/trigger";
-import {from} from "../src/from";
+import {trigger} from "../src";
+import {from} from "../src";
 import {end} from "../src/end";
-import {readonly} from "../src/readonly";
+import {readonly} from "../src";
 import {EventEmitter} from "events";
 
 const noop1 = () => {};
