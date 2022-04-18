@@ -27,9 +27,9 @@
   "types": "dist/index.d.ts",
   "files": ["dist/*.js", "dist/*.mjs", "dist/*.map", "dist/*.ts"],
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "test": "jest --collectCoverage",
+    "dev": "jest --watchAll",
     "build": "parcel build",
-    "test": "jest",
     "npm": "yarn test && yarn build && yarn publish"
   },
   "devDependencies": {
