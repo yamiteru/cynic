@@ -1,6 +1,6 @@
 # Cynic
 
-Tiny (±250 bytes) and simple TS pub/sub library with great focus on performance.
+Tiny and simple TS pub/sub library with great focus on performance.
 
 ## Concept
 
@@ -47,7 +47,13 @@ const $trigger = event<boolean, "active" | "inactive">((v) => v ? "active": "ina
 const $onlyPositive event<number>((v) => v >= 0 ? v: undefined);
 
 // Event with no input
-const clicked$ = trigger();
+const $clicked = trigger();
+
+// Readonly event
+const $readonlyTrigger = readonly($trigger);
+
+// Event from EventTarget or EventEmitter
+const $onWindowResize = from(window, "resize");
 ```
 
 ### subscribe

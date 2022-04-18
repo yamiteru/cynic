@@ -1,5 +1,9 @@
 import { event, clear, has, publish, size, subscribe } from "../src";
 import {trigger} from "../src/trigger";
+import {from} from "../src/from";
+import {end} from "../src/end";
+import {readonly} from "../src/readonly";
+import {EventEmitter} from "events";
 
 const noop1 = () => {};
 const noop2 = () => {};
@@ -114,5 +118,33 @@ describe("event", () => {
         publish($trigger);
 
         expect(count).toBe(3);
+    });
+
+    it("create event from EventTarget", () => {
+        let output = null;
+        const input = 1;
+        const emitter = new EventEmitter();
+        const type = "test";
+        const $event = from<number>(emitter, type);
+
+        subscribe($event, (v) => output = v);
+
+        emitter.emit(type, input);
+
+        end($event);
+
+        emitter.emit(type, 2);
+
+        expect(output).toBe(input);
+    });
+
+    it("does not publish on readonly", () => {
+        let output = null;
+        const input = 1;
+        const $event = readonly(event<number>(null, [(v) => output = v]));
+
+        publish($event, input);
+
+        expect(output === input).toBe(false);
     });
 });

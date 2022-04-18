@@ -1,10 +1,27 @@
 {
   "name": "@yamiteru/cynic",
-  "version": "3.0.0",
-  "repository": "https://github.com/the-yamiteru/cynic.git",
-  "author": "Miroslav Vršecký <office@yamiteru.xyz>",
+  "version": "3.1.1",
   "license": "MIT",
-  "description": "Tiny (±250 bytes) and simple TS pub/sub library with great focus on performance.",
+  "author": "Miroslav Vršecký <yamiteru@icloud.com>",
+  "description": "Tiny and simple TS pub/sub library with great focus on performance.",
+
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yamiteru/cynic.git",
+    "directory": "src"
+  },
+  "keywords": [
+    "cynic",
+    "reactive",
+    "reactive-programming",
+    "pub-sub",
+    "javascript",
+    "typescript"
+  ],
+  "bugs": {
+    "url": "https://github.com/yamiteru/cynic/issues"
+  },
+  "homepage": "https://github.com/yamiteru/cynic",
 
   "source": "src/index.ts",
   "main": "dist/cynic.js",

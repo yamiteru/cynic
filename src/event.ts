@@ -1,6 +1,7 @@
-import {EMPTY, MAP, SET} from "./symbols";
+import {EMPTY, GET_END, MAP, SET, SET_END} from "./symbols";
 import {TCallback, Event, Nullable, TMap} from "./types";
 import {defaultMap} from "./defaultMap";
+import {freeze} from "./freeze";
 
 export function event<
     I,
@@ -12,8 +13,13 @@ export function event<
 ): Event<I, O, C> {
     map ??= defaultMap;
 
-    return Object.freeze({
+    let ended = false;
+    return freeze({
         [SET]: new Set<C>(subs),
-        [MAP]: map
+        [MAP]: map,
+        [GET_END]: () => ended,
+        [SET_END]: (value) => {
+            ended = value;
+        }
     });
 }
