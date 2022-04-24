@@ -3,6 +3,12 @@
 Tiny and simple TS pub/sub library with great focus on performance.   
 _(run `yarn benchmark` too see how much faster Cynic is)_
 
+## Installation
+
+```shell
+yarn add @yamiteru/cynic
+```
+
 ## Concept
 
 Most pub/sub libraries are based on string matching. Some even add an additional wildcard matching like `player.*`. Although this is a valid approach it's usually unnecessary.
