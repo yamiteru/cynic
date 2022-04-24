@@ -5,6 +5,5 @@ export * from "./size";
 export * from "./has";
 export * from "./clear";
 export * from "./types";
-export * from "./fromTarget";
-export * from "./fromEmitter";
 export * from "./clear";
+export * from "./once";
