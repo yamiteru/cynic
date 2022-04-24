@@ -1,6 +1,6 @@
 {
   "name": "@yamiteru/cynic",
-  "version": "3.3.1",
+  "version": "3.3.2",
   "license": "MIT",
   "author": "Miroslav Vršecký <yamiteru@icloud.com>",
   "description": "Tiny and simple TS pub/sub library with great focus on performance.",

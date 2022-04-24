@@ -1,8 +1,6 @@
 import {TCallback, Event} from "./types";
 import {SET} from "./symbols";
 
-export function event<O>(subs?: TCallback<O>[]): Event<O> {
-    return {
-        [SET]: subs ? new Set(subs): false,
-    };
-}
+export const event = <O>(subs?: TCallback<O>[]): Event<O> => ({
+    [SET]: subs ? new Set(subs): false,
+});
