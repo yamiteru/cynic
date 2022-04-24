@@ -2,7 +2,9 @@
     "compilerOptions": {
         "target": "ESNext",
         "moduleResolution": "node",
-        "esModuleInterop": true
+        "esModuleInterop": true,
+        "declaration": true,
+        "resolveJsonModule": true
     },
     "include": [
         "src/**/*"
