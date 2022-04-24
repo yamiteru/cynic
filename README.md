@@ -1,6 +1,7 @@
 # Cynic
 
-Tiny and simple TS pub/sub library with great focus on performance.
+Tiny and simple TS pub/sub library with great focus on performance.   
+_(run `yarn benchmark` too see how much faster Cynic is)_
 
 ## Concept
 
@@ -23,7 +24,7 @@ const player = {
 And can be cleared just like this:
 
 ```typescript
-for (const $event of player) {
+for (const event$ of player) {
     clear(event$);
 }
 ```
@@ -37,29 +38,20 @@ ___
 ## Usage
 
 ```typescript
-// Non-mapped event
-const $playerPosition = event<{ x: number, y: number, z: number }>();
+// Event w/ input
+const playerPosition$ = event<{ x: number, y: number, z: number }>();
 
-// Mapped event
-const $trigger = event<boolean, "active" | "inactive">((v) => v ? "active": "inactive");
+// Event w/o input
+const clicked$ = event<undefined>();
 
-// Validated event
-const $onlyPositive event<number>((v) => v >= 0 ? v: undefined);
-
-// Event with no input
-const $clicked = trigger();
-
-// Readonly event
-const $readonlyTrigger = readonly($trigger);
-
-// Event from EventTarget or EventEmitter
-const $onWindowResize = from(window, "resize");
+// Event that triggers only once
+const once$ = once<number>();
 ```
 
 ### subscribe
 
 ```typescript
-const playerPositionUnsubscribe = subscribe($playerPosition, (pos) => {
+const playerPositionUnsubscribe = subscribe(playerPosition$, (pos) => {
     notifyEnemies(pos);
     updateChunks(pos);
 });
@@ -69,30 +61,27 @@ const playerPositionUnsubscribe = subscribe($playerPosition, (pos) => {
 
 ```typescript
 // event
-publish($playerPosition, {
+publish(playerPosition$, {
     x: 10, y: 0, z: 4
 });
-
-// trigger
-publish($clicked);
 ```
 
 ## size
 
 ```typescript
-const subCount = size($playerPosition);
+const subCount = size(playerPosition$);
 ```
 
 ## has
 
 ```typescript
-const hasLog = has($playerPosition, console.log);
+const hasLog = has(playerPosition$, console.log);
 ```
 
 ## clear
 
 ```typescript
-clear($playerPosition);
+clear(playerPosition$);
 ```
 
 ___
