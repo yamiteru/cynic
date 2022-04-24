@@ -1,14 +1,6 @@
-import {EMPTY, MAP, READONLY, SET} from "./symbols";
-import { Event } from "./types";
+import {Event, TCallback} from "./types";
+import {SET} from "./symbols";
 
-export function publish<I, O>($event: Event<I, O>, value?: I) {
-    if($event[READONLY] !== true) {
-        const mappedValue = $event[MAP](value);
-
-        if(!!$event[EMPTY] || mappedValue !== undefined) {
-            for (const callback of $event[SET].values()) {
-                callback(mappedValue);
-            }
-        }
-    }
+export function publish<O>(event$: Event<O>, value?: O) {
+    if(event$[SET]) for (const callback of (event$[SET] as Set<TCallback<O>>).values()) callback(value, event$);
 }

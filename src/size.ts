@@ -1,6 +1,6 @@
 import { SET } from "./symbols";
-import { Event } from "./types";
+import {Event, TCallback} from "./types";
 
-export function size<I, O>($event: Event<I, O>) {
-	return $event[SET].size;
+export function size<O>(event$: Event<O>) {
+	return (event$[SET] as Set<TCallback<O>>)?.size || 0;
 }

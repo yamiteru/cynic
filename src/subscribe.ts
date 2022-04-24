@@ -1,10 +1,7 @@
-import { SET } from "./symbols";
 import { TCallback, Event } from "./types";
+import {SET} from "./symbols";
 
-export function subscribe<I, O, C extends TCallback<O> = TCallback<O>>($event: Event<I, O, C>, callback: C) {
-	$event[SET].add(callback);
-
-	return () => {
-		$event[SET].delete(callback);
-	};
+export function subscribe<O>(event$: Event<O>, callback: TCallback<O>) {
+	(event$[SET] || (event$[SET] = new Set())).add(callback);
+	return () => (event$[SET] as Set<TCallback<O>>).delete(callback);
 }

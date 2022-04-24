@@ -1,8 +1,4 @@
-import { event, clear, has, publish, size, subscribe } from "../src";
-import {trigger} from "../src";
-import {from} from "../src";
-import {end} from "../src/end";
-import {readonly} from "../src";
+import {clear, event, has, publish, size, subscribe, fromEmitter} from "../src";
 import {EventEmitter} from "events";
 
 const noop1 = () => {};
@@ -23,7 +19,7 @@ describe("event", () => {
 
     it("subscribes internal", () => {
         let count = 0;
-        const event$ = event<string>(null, [
+        const event$ = event<string>([
             () => count++, 
             () => count++
         ]);
@@ -82,69 +78,36 @@ describe("event", () => {
         expect(size(event$)).toBe(1);
     });
 
-    it("maps input value to output", () => {
-        let output = null;
-        const input = 10;
-        const $event = event<number, string>((v) => `${v}`);
-
-        subscribe($event, (v) => output = v);
-        publish($event, input);
-
-        expect(output).toBe(`${input}`);
-    });
-
-    it("validates input with map", () => {
-        let output = null;
-        const input = 7;
-        const $event = event<number>((v) => v >= 0 ? v: undefined);
-
-        subscribe($event, (v) => output = v);
-        publish($event, input);
-        publish($event, -5);
-
-        expect(output).toBe(input);
-    });
-
     it("triggers without any data", () => {
         let count = 0;
-        const $trigger = trigger();
+        const $event = event<undefined>();
 
-        subscribe($trigger, () => {
+        subscribe($event, () => {
             count += 1;
         });
 
-        publish($trigger);
-        publish($trigger);
-        publish($trigger);
+        publish($event);
+        publish($event);
+        publish($event);
 
         expect(count).toBe(3);
     });
 
-    it("create event from EventTarget", () => {
+    it("create event from EventEmitter", () => {
         let output = null;
         const input = 1;
         const emitter = new EventEmitter();
         const type = "test";
-        const $event = from<number>(emitter, type);
+        const $event = fromEmitter<number>(emitter, type);
 
         subscribe($event, (v) => output = v);
 
         emitter.emit(type, input);
 
-        end($event);
+        clear($event);
 
         emitter.emit(type, 2);
 
         expect(output).toBe(input);
-    });
-
-    it("does not publish on readonly", () => {
-        let output = null;
-        const input = 1;
-        const $event = readonly(event<number>(null, [(v) => output = v]));
-
-        publish($event, input);
-
-        expect(output === input).toBe(false);
     });
 });
