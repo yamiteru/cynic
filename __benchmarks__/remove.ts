@@ -6,12 +6,16 @@ import {noop} from "../shared";
 const rxEvent = new Subject();
 const cynicEvent = event();
 
-export default suite()
-	.add("RxJS", function () {
-		const sub = rxEvent.subscribe(noop);
-		sub.unsubscribe();
-	})
-	.add("Cynic", function () {
-		const unsub = subscribe(cynicEvent, noop);
-		unsub();
-	});
+(() => {
+	console.log("# remove");
+
+	suite()
+		.add("RxJS", function () {
+			rxEvent.subscribe(noop).unsubscribe();
+		})
+		.add("Cynic", function () {
+			subscribe(cynicEvent, noop)();
+		})
+ 		.run();
+	}
+)();
