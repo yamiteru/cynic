@@ -1,7 +1,6 @@
 import {Event} from "./types";
-import {ON_CLEAR, SET} from "./symbols";
+import {SET} from "./symbols";
 
-export const clear = <I, O>(event$: Event<O>) => {
+export function clear<I, O>(event$: Event<O>) {
 	event$[SET] = new Set();
-	event$[ON_CLEAR]?.();
 }
