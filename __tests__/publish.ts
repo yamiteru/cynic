@@ -1,8 +1,8 @@
 import {event, publish, once} from "../src";
 
 describe("Publish", () => {
-	let first = null;
-	let second = null;
+	let first: any = null;
+	let second: any = null;
 
 	const input = [1, 2];
 
