@@ -2,15 +2,11 @@
 
 Blazingly fast, low-level, type-safe and tree shakeable <0.5Kb event stream library.
 
----
-
 ## Installation
 
 ```shell
 yarn add @yamiteru/cynic
 ```
-
----
 
 ## Table of contents
 
@@ -19,6 +15,6 @@ yarn add @yamiteru/cynic
 - [Modularity](./docs/modularity.md)
 - [Benchmark](./docs/benchmark.md)
 
-___
+---
 
 Have a beautiful day 🍀
