@@ -1,6 +1,6 @@
 # Cynic
 
-Blazingly fast, low-level, type-safe and tree shakeable <0.5Kb event stream library.
+🔥 Blazingly fast, low-level, type-safe and tree shakeable <0.5Kb event stream library.
 
 ## Installation
 
