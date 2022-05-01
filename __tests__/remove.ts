@@ -1,19 +1,21 @@
-import {event, subscribe, publish, clear} from "../src";
+import { event, subscribe, publish, clear, subscribeUnsafe } from "../src";
 
 describe("Remove", () => {
 	it("should remove one subscriber", () => {
 		let count = 0;
 
 		const event$ = event();
-		const unsub = subscribe(event$, () => ++count);
+		const unsub1 = subscribe(event$, () => ++count);
+		const unsub2 = subscribeUnsafe(event$, () => ++count);
 
 		publish(event$);
 
-		unsub();
+		unsub1();
+		unsub2();
 
 		publish(event$);
 
-		expect(count).toBe(1);
+		expect(count).toBe(2);
 	});
 
 	it("should remove all subscribers", () => {

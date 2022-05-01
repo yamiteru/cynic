@@ -1,4 +1,4 @@
-import {event, publish, once} from "../src";
+import { event, publish, once, publishUnsafe } from "../src";
 
 describe("Publish", () => {
 	let first: any = null;
@@ -13,11 +13,13 @@ describe("Publish", () => {
 		]);
 
 		publish(event$, input[0]);
+		publishUnsafe(event$, input[0]);
 
 		expect(first).toBe(input[0]);
 		expect(second).toBe(input[0]);
 
 		publish(event$, input[1]);
+		publishUnsafe(event$, input[1]);
 
 		expect(first).toBe(input[1]);
 		expect(second).toBe(input[1]);
