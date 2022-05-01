@@ -1,10 +1,13 @@
-import {event, subscribe} from "../src";
+import { eventWithout, subscribe, subscribeUnsafe } from "../src";
 import { Subject } from "rxjs";
 import {suite} from "./_shared";
 import {noop} from "../shared";
 
 const rxEvent = new Subject();
-const cynicEvent = event();
+const cynicEvent = eventWithout();
+
+rxEvent.subscribe(noop).unsubscribe();
+subscribe(cynicEvent, noop)();
 
 (() => {
 	console.log("# subscribe");
@@ -14,7 +17,7 @@ const cynicEvent = event();
 			rxEvent.subscribe(noop);
 		})
 		.add("Cynic", function () {
-			subscribe(cynicEvent, noop);
+			subscribeUnsafe(cynicEvent, noop);
 		})
  		.run();
 	}

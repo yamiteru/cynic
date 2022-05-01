@@ -1,4 +1,4 @@
-import {event} from "../src";
+import { eventWithout } from "../src";
 import { Subject } from "rxjs";
 import {suite} from "./_shared";
 
@@ -10,7 +10,7 @@ import {suite} from "./_shared";
 			new Subject();
 		})
 		.add("Cynic", function () {
-			event();
+			eventWithout();
 		})
  		.run();
 	}
