@@ -8,7 +8,7 @@ Thanks to function composition approch that Cynic uses we can create as many met
 
 So if you have any ideas for new methods that should be a part of the official Cynic package then just go ahead and create a PR! 
 
-## Inofficial
+## Unofficial
 
 Since event is just an object with secret attributes hidden behind symbols you can basically do the same and merge your specific (ideally) secret attributes with the ones created by the official event. 
 
