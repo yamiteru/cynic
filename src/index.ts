@@ -6,4 +6,5 @@ export * from "./has";
 export * from "./clear";
 export * from "./types";
 export * from "./clear";
+export * from "./kill";
 export * from "./once";
