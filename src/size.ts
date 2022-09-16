@@ -1,10 +1,9 @@
-import { SET } from "./symbols";
-import {Event, TCallback} from "./types";
+import {Event} from "./types";
 
 export function size<O>(event$: Event<O>) {
-	return event$[SET] ? sizeUnsafe(event$) : 0;
+	return event$.set ? sizeUnsafe(event$) : 0;
 }
 
 export function sizeUnsafe<O>(event$: Event<O>) {
-	return (event$[SET] as Set<TCallback<O>>).size;
+	return event$.set?.size || 0;
 }

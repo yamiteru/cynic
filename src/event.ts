@@ -1,13 +1,13 @@
 import { TCallback, Event, Maybe } from "./types";
-import {SET} from "./symbols";
 
-const WITHOUT = {
-    [SET]: false
+const WITHOUT: Event<any> = {
+		alive: true,
+    set: null
 };
 
 function WITH<O>(subs: TCallback<O>[]) {
-    return { [SET]: new Set(subs) };
-};
+    return { alive: true, set: new Set(subs) };
+}
 
 export function eventWithout<O>(): Event<O> {
     return Object.create(WITHOUT);
