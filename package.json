@@ -1,6 +1,6 @@
 {
   "name": "@yamiteru/cynic",
-  "version": "3.3.6",
+  "version": "3.3.7",
   "license": "MIT",
   "author": "Miroslav Vršecký <yamiteru@icloud.com>",
   "description": "Tiny and simple TS pub/sub library with great focus on performance.",
@@ -57,7 +57,7 @@
   },
   "engines": {
     "npm": ">=7.0.0",
-    "node": ">=16.0.0"
+    "node": ">=14.0.0"
   },
   "packageManager": "yarn@1.22.18"
 }

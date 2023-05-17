@@ -10,7 +10,7 @@ describe("Remove", () => {
 
 		publish(event$);
 
-		unsub1();
+		unsub1?.();
 		unsub2();
 
 		publish(event$);
